@@ -1,15 +1,29 @@
 <html>
   <body>
+    <div id="container"></div>
     <script>
-      function changeCount() {
-        const currentValue = document.getElementById("button").innerHTML;
-        const currentCounter = currentValue.split(" ")[1];
-        console.log(currentCounter);
-        const newCounter = parseInt(currentCounter) + 1;
-        document.getElementById("button").innerHTML = "count " + newCounter;
+      // definindg the global state
+      let state = {
+        count: 0,
+      };
+      function onButtonPress() {
+        state.count++;
+        buttonComponentRender();
       }
-    </script>
 
-    <button id="button" onClick="changeCount()">count 0</button>
+      function buttonComponentRender() {
+        document.getElementById("container").innerHTML = "";
+        const component = buttonComponent(state.count);
+        document.getElementById("container").appendChild(component);
+      }
+
+      function buttonComponent(count) {
+        const button = document.createElement("button");
+        button.innerHTML = `counter ${count}`;
+        button.setAttribute("onclick", `onButtonPress()`);
+        return button;
+      }
+      onButtonPress();
+    </script>
   </body>
 </html>
