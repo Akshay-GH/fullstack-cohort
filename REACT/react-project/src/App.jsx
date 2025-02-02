@@ -1,51 +1,48 @@
-//hooks
-// import { useState } from "react";
-
-// function App() {
-//   const [count, setCount] = useState(0);
-
-//   return (
-//     <>
-//       <div>
-//         <CustomButton count={count} setCount={setCount}></CustomButton>
-//       </div>
-//     </>
-//   );
-// }
-
-// function CustomButton(props) {
-//   function onClickHandler() {
-//     props.setCount(props.count + 1);
-//   }
-
-//   return <button onClick={onClickHandler}>Counter {props.count}</button>;
-// }
-
-// export default App;
-
 import { useState } from "react";
 
 function App() {
   const [todos, setTodos] = useState([
     {
-      title: "go to gym ",
-      description: "go to gym at 6:00 am",
+      title: "Go to gym",
+      description: "Go to gym at 6:00 am",
       completed: false,
     },
     {
-      title: "study web dev",
-      description: "study 9 to 12 pm",
+      title: "Study web dev",
+      description: "Study 9 to 12 pm",
       completed: false,
     },
     {
-      title: "study dsa  ",
-      description: "at 6 to 8 am",
+      title: "Study DSA",
+      description: "At 6 to 8 am",
       completed: false,
     },
   ]);
 
-  function addTodo() {}
-  return <div>{JSON.stringify(todos)}</div>;
+  setTodos([...todos, { title: "new todo", description: "adding new todo" }]);
+
+  return (
+    <div>
+      {todos.map((todo, index) => (
+        <Todo
+          key={index}
+          title={todo.title}
+          description={todo.description}
+          completed={todo.completed}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Todo(props) {
+  return (
+    <div>
+      <p>Title: {props.title}</p>
+      <p>Description: {props.description}</p>
+      <p>Status: {props.completed ? "Completed" : "Pending"}</p>
+    </div>
+  );
 }
 
 export default App;
